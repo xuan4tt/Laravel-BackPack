@@ -52,8 +52,34 @@ class CrawlingCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // columns
+        
+        CRUD::addColumn([
+            'label' => 'Category',
+            'type' => 'relationship',
+            'name' => 'category',
+            'entity' => 'CrawlingCategory',
+            'attribute' => 'name',
+            'model' => Category::class
+        ]);
+        
+        CRUD::addColumn([
+            'label' => 'User',
+            'type' => 'relationship',
+            'name' => 'user',
+            'entity' => 'CrawlingUser',
+            'attribute' => 'name',
+            'model' => User::class
+        ]);
 
-        /**
+        CRUD::addColumn([
+            'name' => 'created_at',
+            'type' => 'datetime',
+            'label' => 'Date time',
+        ]);
+        
+        CRUD::column('category_id')->remove();
+        CRUD::column('user_id')->remove();
+        /** 
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
@@ -68,7 +94,6 @@ class CrawlingCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setShowView('welcome');
         //CRUD::setValidation(CrawlingRequest::class);
         //CRUD::setFromDb(); // fields
         CRUD::addField([
@@ -185,4 +210,6 @@ class CrawlingCrudController extends CrudController
 
         //return redirect()->back();
     }
+
+    
 }

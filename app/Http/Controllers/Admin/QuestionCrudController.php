@@ -42,7 +42,8 @@ class QuestionCrudController extends CrudController
     protected function setupListOperation()
     {
         // CRUD::setFromDb(); // columns
-        $this->crud->addColumn([
+       
+        CRUD::addColumn([
             'label' => 'Crawling',
             'name' => 'crawling',
             'type' => 'relationship',
